@@ -112,7 +112,25 @@ class Calculator(QWidget):
             print("not a numeric formular")
             return
         self.calc_label.setText(str(self.numeric_evaluation(self.calc_label.text())))
-        
+
+
+
+    def numeric_evaluation(self, string_to_eval):
+        if "+" in string_to_eval:
+            return self.numeric_evaluation(string_to_eval.split("+", 1)[0]) + self.numeric_evaluation(string_to_eval.split("+", 1)[1])
+        if "-" in string_to_eval and not string_to_eval[0] == "-":  #check if first number negativ
+            return self.numeric_evaluation(string_to_eval.split("-", 1)[0]) - self.numeric_evaluation(string_to_eval.split("-", 1)[1]) 
+        if "*" in string_to_eval and "/" in string_to_eval:
+            if string_to_eval.index("*") < string_to_eval.index("/"):
+                return self.numeric_evaluation(string_to_eval.split("*", 1)[0]) * self.numeric_evaluation(string_to_eval.split("*", 1)[1]) 
+            else:
+                return self.numeric_evaluation(string_to_eval.split("/", 1)[0]) / self.numeric_evaluation(string_to_eval.split("/", 1)[1])
+        if "*" in string_to_eval:
+            return self.numeric_evaluation(string_to_eval.split("*", 1)[0]) * self.numeric_evaluation(string_to_eval.split("*", 1)[1])
+        if "/" in string_to_eval:
+            return self.numeric_evaluation(string_to_eval.split("/", 1)[0]) / self.numeric_evaluation(string_to_eval.split("/", 1)[1])
+
+        return float(string_to_eval)
     
 
 def main():
