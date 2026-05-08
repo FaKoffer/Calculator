@@ -132,6 +132,9 @@ class Calculator(QWidget):
 
         return float(string_to_eval)
     
+    def check_string_is_valid_numeric_equation(self, string_to_eval):
+        pass
+    
 
 def main():
     app = QApplication(sys.argv)
